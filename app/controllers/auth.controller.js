@@ -4,9 +4,12 @@ const User = db.user;
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
+const { v4: uuidv4 } = require('uuid');
+const id = uuidv4();
 
 exports.register = (req, res) => {
   const user = new User({
+    Id: id,
     userName: req.body.userName,
     accountNumber: req.body.accountNumber,
     identityNumber: req.body.identityNumber,
