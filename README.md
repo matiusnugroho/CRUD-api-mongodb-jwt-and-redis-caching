@@ -16,6 +16,24 @@ A brief description of what this project does and who it's for
 | :-------- | :------- | :------------------------- |
 | `api_key` | `string` | **Required**. x-access-token header|
 
+#### Get User by Account Number 
+```http
+  GET api/user/accountNumber/:accountNumber
+```
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `api_key` | `string` | **Required**. x-access-token header|
+| `accounNumber` | `mumber` | any|
+
+#### Get User by Account Number 
+```http
+  GET api/user/identityNumber/:identityNumber
+```
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `api_key` | `string` | **Required**. x-access-token header|
+| `identityNumber` | `mumber` | any|
+
 #### Login and get token
 
 ```http

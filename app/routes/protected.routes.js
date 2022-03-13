@@ -11,4 +11,6 @@ module.exports = function(app) {
   });
 
   app.get("/api/users", [authJwt.verifyToken], controller.getAll);
+  app.get("/api/user/identityNumber/:identityNumber",[authJwt.verifyToken], controller.getByIdentityNumber);
+  app.get("/api/user/accountNumber/:accountNumber",[authJwt.verifyToken], controller.getByAccountNumber);
 };

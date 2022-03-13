@@ -4,29 +4,29 @@ const User = db.user;
 checkDuplicateUsernameOrEmail = (req, res, next) => {
   // Username
   User.findOne({
-    username: req.body.username
+    userName: req.body.userName
   }).exec((err, user) => {
     if (err) {
-      res.status(500).send({ message: err });
+      res.status(500).send({success: false, message: err });
       return;
     }
 
     if (user) {
-      res.status(400).send({ message: "Username is taken!" });
+      res.status(400).send({success: false, message: "Username is taken!" });
       return;
     }
 
     // Email
     User.findOne({
-      email: req.body.email
+      emailAddress: req.body.emailAddress
     }).exec((err, user) => {
       if (err) {
-        res.status(500).send({ message: err });
+        res.status(500).send({success: false, message: err });
         return;
       }
 
       if (user) {
-        res.status(400).send({ message: "Email is registered by another account!" });
+        res.status(400).send({success: false, message: "Email is registered by another account!" });
         return;
       }
 

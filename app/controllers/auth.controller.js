@@ -19,10 +19,10 @@ exports.register = (req, res) => {
 
   user.save((err, user) => {
     if (err) {
-      res.status(500).send({ message: err });
+      res.status(500).send({success:false, message: err });
       return;
     }
-    res.send({ message: "User was registered successfully!",user});
+    res.send({ success: true, message: "User was registered successfully!",user});
   });
 };
 
@@ -37,7 +37,7 @@ exports.login = (req, res) => {
       }
 
       if (!user) {
-        return res.status(404).send({ message: "User Not found." });
+        return res.status(404).send({ success: false, message: "User Not found." });
       }
 
       var passwordIsValid = bcrypt.compareSync(
@@ -47,6 +47,7 @@ exports.login = (req, res) => {
 
       if (!passwordIsValid) {
         return res.status(401).send({
+          success: false, 
           accessToken: null,
           message: "Invalid Password!"
         });
@@ -57,6 +58,7 @@ exports.login = (req, res) => {
       });
 
       res.status(200).send({
+        success: true, 
         user,
         accessToken: token
       });
