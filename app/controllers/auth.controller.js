@@ -7,8 +7,10 @@ var bcrypt = require("bcryptjs");
 
 exports.register = (req, res) => {
   const user = new User({
-    username: req.body.username,
-    email: req.body.email,
+    userName: req.body.userName,
+    accountNumber: req.body.accountNumber,
+    identityNumber: req.body.identityNumber,
+    emailAddress: req.body.emailAddress,
     password: bcrypt.hashSync(req.body.password, 8)
   });
 
@@ -23,7 +25,7 @@ exports.register = (req, res) => {
 
 exports.login = (req, res) => {
   User.findOne({
-    username: req.body.username
+    userName: req.body.username
   })
     .exec((err, user) => {
       if (err) {
