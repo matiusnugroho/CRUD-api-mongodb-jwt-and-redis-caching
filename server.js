@@ -11,9 +11,9 @@ var corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
+//console.log({client});
 const db = require("./app/models");
-require("./app/utils/redis");
+
 
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
