@@ -5,7 +5,7 @@ exports.allAccess = (req, res) => {
 };
 
 exports.getAll = async(req, res) => {
-  const user = await User.find();
+  const user = await User.find();//.cache({ expire: 10 });
   data = {success:true,user};
   res.json(data);
 };

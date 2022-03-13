@@ -10,7 +10,10 @@ const client = redis.createClient({
   client.on("error", function (err) {
     throw err;
   });
-  client.hget = util.promisify(client.hget);
+  client.on("connect",()=>{
+    console.info("Connected to redis");
+  })
+  client.HGET = util.promisify(client.HGET);
 
 // create reference for .exec
 const exec = mongoose.Query.prototype.exec;
@@ -34,7 +37,7 @@ mongoose.Query.prototype.exec = async function() {
     ...this.getQuery(),
     collection: this.mongooseCollection.name
   });
-  const cacheValue = await client.hget(this.hashKey, key);
+  const cacheValue = await client.HGET(this.hashKey, key);
   if (!cacheValue) {
     const result = await exec.apply(this, arguments);
     client.hset(this.hashKey, key, JSON.stringify(result));
