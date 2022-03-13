@@ -34,11 +34,7 @@ mongoose.Query.prototype.exec = async function() {
     ...this.getQuery(),
     collection: this.mongooseCollection.name
   });
-
-  // get cached value from redis
   const cacheValue = await client.hget(this.hashKey, key);
-
-  // if cache value is not found, fetch data from mongodb and cache it
   if (!cacheValue) {
     const result = await exec.apply(this, arguments);
     client.hset(this.hashKey, key, JSON.stringify(result));
@@ -47,8 +43,7 @@ mongoose.Query.prototype.exec = async function() {
     console.log('Return data from MongoDB');
     return result;
   }
-
-  // return found cachedValue
+  
   const doc = JSON.parse(cacheValue);
   console.log('Return data from Redis');
   return Array.isArray(doc)

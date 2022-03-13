@@ -9,7 +9,9 @@ module.exports = function(app) {
     );
     next();
   });
-
+  app.get('/api',(req,res)=>{
+    res.send("API Works");
+  });
   app.post(
     "/api/register",
     [
