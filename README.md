@@ -1,7 +1,11 @@
 
 # CRUD Express, MongoDB, JWT and Redis Caching
 
-A brief description of what this project does and who it's for
+A very simple CRUD operation on MongoDB and caching with Redis
+
+## Redis caching
+For example we are caching user and set expiry for 10s, you will see {source : server/cache} in response respectively.
+see user controller for detail
 
 
 ## API Reference
@@ -9,7 +13,7 @@ A brief description of what this project does and who it's for
 #### Get all user
 
 ```http
-  GET /api/user
+  GET /api/users
 ```
 
 | Parameter | Type     | Description                |
