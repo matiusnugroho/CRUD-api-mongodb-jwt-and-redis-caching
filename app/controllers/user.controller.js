@@ -5,10 +5,7 @@ const redis = require('redis');
 const client = redis.createClient();
 client.connect();
 const User = db.user;
-exports.allAccess = (req, res) => {
-  res.status(200).send("Public Content.");
-};
-console.log({client})
+
 exports.getAll = async(req, res) => {
   const users = await client.get('users');
   let data;
@@ -19,6 +16,7 @@ exports.getAll = async(req, res) => {
     const users = await User.find();
     data = {source:"server",data:users};
     client.set('users',JSON.stringify(users));
+    client.expire('users',10);
   }
   res.send(data);
 }
